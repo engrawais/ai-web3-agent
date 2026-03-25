@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.pyc
+.venv/
 .env
 .env.*
 !.env.example
@@ -12,6 +13,10 @@ node_modules/
 # Build Artifacts
 dist/
 build/
+
+# .NET
+**/bin/
+**/obj/
 
 # Logs
 *.log

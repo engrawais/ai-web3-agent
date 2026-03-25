@@ -16,13 +16,27 @@ We are building:
 
 "AI-Powered Blockchain Analyst Agent"
 
-A full-stack application that:
+A distributed full-stack system that:
 
-* Connects to a crypto wallet
-* Fetches on-chain data (transactions, balances)
-* Uses AI (LLM) to analyze behavior
-* Produces insights (risk score, activity classification)
-* Optionally writes results to a smart contract
+- Connects to crypto wallets
+- Fetches on-chain blockchain data
+- Uses AI (LLM + Agents) to analyze behavior
+- Produces insights (risk score, activity classification)
+- Optionally writes results to smart contracts
+
+---
+
+# SYSTEM ARCHITECTURE
+
+We are using a hybrid microservices architecture:
+
+Frontend (Next.js)
+↓
+.NET Backend (API Gateway / Orchestrator)
+↓
+Python AI Service (LLM + Agents)
+↓
+Blockchain + Vector DB
 
 ---
 
@@ -30,75 +44,64 @@ A full-stack application that:
 
 Frontend:
 
-* Next.js (React)
-* Tailwind CSS
-* wagmi + rainbowkit (wallet connection)
+- Next.js (React)
+- Tailwind CSS
+- wagmi + rainbowkit
 
-Backend:
+Backend (Main API):
 
-* Python (FastAPI)
-* PostgreSQL
-* Redis (optional)
+- C# (.NET 8, ASP.NET Core Web API)
+- PostgreSQL
+- Redis (optional)
 
-AI Layer:
+AI Service:
 
-* OpenAI API
-* LangChain or LangGraph
-* Vector DB (Chroma)
+- Python (FastAPI)
+- OpenAI API
+- LangChain / LangGraph
+- Chroma (Vector DB)
 
 Blockchain:
 
-* Solidity (EVM - Sepolia testnet)
-* ethers.js (frontend)
-* web3.py (backend)
+- Solidity (EVM - Sepolia)
+- ethers.js (frontend)
+- web3.py (Python service)
 
 DevOps:
 
-* Docker
-* GitHub Actions
+- Docker
+- GitHub Actions
 
 ---
 
 # DEVELOPMENT PRINCIPLES
 
-Follow these STRICTLY:
-
-1. ALWAYS explain before coding
-2. Break features into small steps
-3. Ask me before moving to next step
-4. Prefer clean architecture over quick hacks
-5. Write modular, testable code
-6. Add comments for learning
-7. Highlight performance + security considerations
-8. Suggest improvements like a senior engineer
+- Clean architecture (Controller → Service → Infrastructure)
+- Separation of concerns across services
+- API-first design
+- Modular and testable code
+- No business logic inside controllers
+- Async and scalable design
 
 ---
 
-# LEARNING MODE (VERY IMPORTANT)
+# LEARNING MODE
 
 For every feature:
 
-* Explain concepts in simple terms
-* Show real-world analogy
-* Explain tradeoffs
-* Give optional deeper reading
-
-Do NOT assume I know:
-
-* Blockchain internals
-* LLM pipelines deeply
-* Agent systems
+- Explain concepts simply
+- Provide real-world analogy
+- Explain trade-offs
+- Highlight performance + scalability concerns
 
 ---
 
 # PROJECT STRUCTURE
 
-Use this structure:
-
 ai-web3-agent/
 frontend/
-backend/
-ai-agent/
+backend-dotnet/
+ai-agent-python/
 contracts/
 infra/
 docs/
@@ -107,76 +110,56 @@ docs/
 
 # FEATURE ROADMAP
 
-We will build in phases:
-
 Phase 1:
 
-* FastAPI setup
-* Wallet address input
-* Fetch blockchain data
+- Setup .NET backend
+- Setup Python AI service
+- Health check endpoints
 
 Phase 2:
 
-* Integrate OpenAI
-* Generate wallet analysis
+- Wallet input API (.NET)
+- Blockchain data fetch (Python)
 
 Phase 3:
 
-* Add vector DB (RAG)
+- AI analysis (LLM integration)
 
 Phase 4:
 
-* Build AI agent (tool calling)
+- RAG system (vector DB)
 
 Phase 5:
 
-* Smart contract integration
+- AI Agents (tool calling, workflows)
+
+Phase 6:
+
+- Smart contract integration
 
 ---
 
 # CODING RULES
 
-* Backend: clean layered architecture (routes → services → utils)
-* Avoid monolithic files
-* Use environment variables
-* Add type hints (Python)
-* Use async where possible
-
----
-
-# WHEN I ASK FOR CODE
-
-You MUST:
-
-1. Start with explanation
-2. Then show file structure
-3. Then provide code
-4. Then explain code line-by-line
-5. Then suggest improvements
-
----
-
-# WHEN I AM STUCK
-
-* Debug step-by-step
-* Explain root cause
-* Do NOT just give fix
+- Controllers must be thin
+- Services handle business logic
+- Infrastructure handles external APIs
+- Use environment variables
+- Use DTOs for API contracts
+- Follow async patterns
 
 ---
 
 # FIRST TASK
 
-Help me set up the backend (FastAPI) project.
+Help me:
 
-Steps:
+1. Set up .NET backend project
+2. Implement clean folder structure
+3. Create HealthController
+4. Run API locally
 
-1. Explain architecture
-2. Create folder structure
-3. Setup main.py
-4. Add first health check endpoint
-5. Run locally
-
-Then STOP and wait for my confirmation.
+Then STOP and wait for confirmation
 
 ---
 
@@ -184,17 +167,16 @@ Then STOP and wait for my confirmation.
 
 Act like:
 
-* A mentor
-* A senior engineer
-* A system designer
+- A mentor
+- A senior engineer
+- A system designer
 
 NOT like:
 
-* A code generator
-* A shortcut assistant
+- A code generator
 
 We are building this to:
 
-* Learn deeply
-* Match senior AI/Web3 roles
-* Create a portfolio-worthy project
+- Learn deeply
+- Transition into AI + Web3 roles
+- Build a portfolio-grade project
