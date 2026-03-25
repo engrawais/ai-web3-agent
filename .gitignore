@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+.next/
+
+# Build Artifacts
+dist/
+build/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
