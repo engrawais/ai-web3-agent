@@ -6,9 +6,24 @@ namespace backend_dotnet.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddGatewayServices(this IServiceCollection services)
+    public static IServiceCollection AddGatewayServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IHealthService, HealthService>();
+
+        var aiAgentBaseUrl = configuration["AiAgent:BaseUrl"];
+        if (string.IsNullOrWhiteSpace(aiAgentBaseUrl))
+        {
+            throw new InvalidOperationException(
+                "Configuration 'AiAgent:BaseUrl' is required (e.g. http://127.0.0.1:8000). " +
+                "Set it in appsettings, appsettings.Development.json, or environment variable AiAgent__BaseUrl.");
+        }
+
+        services.AddHttpClient<IBlockchainGatewayService, BlockchainGatewayService>(client =>
+        {
+            client.BaseAddress = new Uri(aiAgentBaseUrl.TrimEnd('/') + "/");
+            client.Timeout = TimeSpan.FromSeconds(60);
+        });
+
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(static o =>

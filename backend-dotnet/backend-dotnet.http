@@ -4,3 +4,12 @@ GET {{backend_dotnet_HostAddress}}/api/health
 Accept: application/json
 
 ###
+
+POST {{backend_dotnet_HostAddress}}/api/wallet/analyze
+Content-Type: application/json
+
+{
+  "address": "0x0000000000000000000000000000000000000000"
+}
+
+###
